@@ -22,4 +22,7 @@ export class UpdateMovieDto {
   @Min(1)
   @Max(10)
   rating?: number;
+  @IsOptional()
+  @IsNumber()
+  genre_id?: number;
 }

@@ -1,4 +1,11 @@
-import { IsDateString, IsNumber, IsString, Max, Min } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class CreateMovieDto {
   @IsString()
