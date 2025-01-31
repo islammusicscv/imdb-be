@@ -14,4 +14,8 @@ export class UsersService {
     const newUser = this.userRepostory.create(user);
     return await this.userRepostory.save(newUser);
   }
+
+  async findByEmail(email: string): Promise<User | null> {
+    return await this.userRepostory.findOne({ where: { email } });
+  }
 }
