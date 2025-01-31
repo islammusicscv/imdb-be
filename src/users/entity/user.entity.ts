@@ -20,8 +20,8 @@ export class User {
   firstName: string;
   @Column()
   lastName: string;
-  @Column()
-  avatar: string;
+  @Column({ nullable: true })
+  avatar?: string;
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()
