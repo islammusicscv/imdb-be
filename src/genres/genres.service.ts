@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Genre } from './entity/genre';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateMovieDto } from '../movies/entities/create-movie.dto';
-import { UpdateMovieDto } from '../movies/entities/update-movie.dto';
 
 @Injectable()
 export class GenresService {
