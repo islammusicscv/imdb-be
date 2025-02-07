@@ -4,20 +4,25 @@ import { Movie } from './entities/movie';
 import { Repository } from 'typeorm';
 import { CreateMovieDto } from './entities/create-movie.dto';
 import { UpdateMovieDto } from './entities/update-movie.dto';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class MoviesService {
   constructor(
     @InjectRepository(Movie)
     private readonly movieRepository: Repository<Movie>,
+    private readonly userService: UsersService,
   ) {}
 
   async findAll(): Promise<Movie[]> {
     return this.movieRepository.find();
   }
 
-  async create(createMovieDto: CreateMovieDto): Promise<Movie> {
-    const newMovie = this.movieRepository.create(createMovieDto);
+  async create(createMovieDto: CreateMovieDto, userId: number): Promise<Movie> {
+    //poiščem userja glede na id
+    const user = await this.userService.findById(userId);
+
+    const newMovie = this.movieRepository.create({ ...createMovieDto, user });
     return this.movieRepository.save(newMovie);
   }
 

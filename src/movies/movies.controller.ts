@@ -6,13 +6,17 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie';
 import { CreateMovieDto } from './entities/create-movie.dto';
 import { UpdateMovieDto } from './entities/update-movie.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('movies')
+@UseGuards(JwtAuthGuard)
 export class MoviesController {
   constructor(private readonly movieService: MoviesService) {}
 
@@ -22,8 +26,11 @@ export class MoviesController {
   }
 
   @Post()
-  async create(@Body() createMovieDto: CreateMovieDto): Promise<Movie> {
-    return this.movieService.create(createMovieDto);
+  async create(
+    @Body() createMovieDto: CreateMovieDto,
+    @Request() req,
+  ): Promise<Movie> {
+    return this.movieService.create(createMovieDto, req.user.userId);
   }
 
   @Patch(':id')
