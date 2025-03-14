@@ -25,6 +25,11 @@ export class MoviesController {
     return this.movieService.findAll();
   }
 
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Movie> {
+    return this.movieService.findOne(+id);
+  }
+
   @Post()
   async create(
     @Body() createMovieDto: CreateMovieDto,

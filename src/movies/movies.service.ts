@@ -18,6 +18,10 @@ export class MoviesService {
     return this.movieRepository.find();
   }
 
+  async findOne(id: number): Promise<Movie> {
+    return await this.movieRepository.findOne({ where: { id } });
+  }
+
   async create(createMovieDto: CreateMovieDto, userId: number): Promise<Movie> {
     //poiščem userja glede na id
     const user = await this.userService.findById(userId);
