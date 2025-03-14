@@ -19,7 +19,10 @@ export class MoviesService {
   }
 
   async findOne(id: number): Promise<Movie> {
-    return await this.movieRepository.findOne({ where: { id } });
+    return await this.movieRepository.findOne({
+      where: { id },
+      relations: ['genre'],
+    });
   }
 
   async create(createMovieDto: CreateMovieDto, userId: number): Promise<Movie> {
